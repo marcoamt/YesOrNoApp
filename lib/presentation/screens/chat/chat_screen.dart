@@ -42,6 +42,7 @@ class _ChatView extends StatelessWidget {
           //like flex 1
           Expanded(
               child: ListView.builder(
+            controller: chatProvider.chatScrollController,
             itemCount: chatProvider.messageList.length,
             itemBuilder: (context, index) {
               final message = chatProvider.messageList[index];
@@ -52,7 +53,10 @@ class _ChatView extends StatelessWidget {
                     );
             },
           )),
-          const MessageFieldBox(),
+          MessageFieldBox(
+            // onValueChanged: (value) => chatProvider.sendMessage(value),
+            onValueChanged: chatProvider.sendMessage,
+          ),
         ],
       ),
     ));
